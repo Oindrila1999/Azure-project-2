@@ -19,9 +19,9 @@
 #### 1. Loaded the sales data into Raw container
 #### 2. Created a Linked service for ADLS storage to connect from ADF
 #### 3. Created 2 dataset, one for Raw container and another for Processed container, which are acting as source and sink respectively
-#### 4. Craetd an ADF pipeline with Copy Activity
+#### 4. Craetd an ADF pipeline with Copy Activity and on success take Notebook Activity to run the databricks notebook and pass dynamic parameter to get widgets value
 #### 5. In copy activity, used dataset linked to Raw container in Source and dataset linked to Processed container in Sink
-#### 6. Run it and load the data
+
 
 ## Step-2:
 
@@ -30,13 +30,16 @@
   &nbsp;&nbsp;&nbsp;&nbsp; 2.1 Set up the service principal 
   &nbsp;&nbsp;&nbsp;&nbsp; 2.2 To ensure accessing ADLS using Service Principal, we need to assign role to Service Principal as Storage Blob Data Contributor, to allow read, write on ADLS
   &nbsp;&nbsp;&nbsp;&nbsp; 2.3 Created an Azure Key Vault and assign role as Key Vault Administrator
-  &nbsp;&nbsp;&nbsp;&nbsp; 2.4 Create secrets using Service Principal client ID and password
+  &nbsp;&nbsp;&nbsp;&nbsp; 2.4 Create secrets using Service Principal client ID,token id, password
   &nbsp;&nbsp;&nbsp;&nbsp; 2.5 Create an Azure Key Vault backed Scope to fetch secret from Azure Key Vault
   &nbsp;&nbsp;&nbsp;&nbsp; 2.6 Now we are ready to configure the connection
 #### 3. Configure Databricks + Azure Data Lake Gen 2 account connection
+#### 4. Create widgets for getting Storage Account Name and Container Name from ADF pipeline parameter dynamically
 #### 4. Create mount point for accessing ADLS Gen 2 storage as a local storage
 #### 5. Read the file from ADLS Raw container using spark readed API and read it using Mount-Point
 #### 6. Clean and transform the data as per business requirement
+
+#### Run the pipeline to copy and transform it and load the data in Parquet format
 
 ## Step-3:
 
@@ -52,15 +55,6 @@
 #### 5. Run it and load the data
 
 ## Now, we can use the table data for further analysis
-
-
-#### Storage-Account link: https://portal.azure.com/#@oindrilamoonmete1999gmail.onmicrosoft.com/resource/subscriptions/44da3401-226e-4354-b234-1f7857fac629/resourceGroups/TestEnvironment/providers/Microsoft.Storage/storageAccounts/storageadlsdemooin/containersList
-
-#### Raw container file link: https://storageadlsdemooin.blob.core.windows.net/herovired-raw/sales_data_proj_2.csv
-
-#### Processed container file(loaded by ADF) link: https://storageadlsdemooin.blob.core.windows.net/herovired-processed/sales_data_proj_2.csv
-
-#### Processed container file(loaded as parquet after databricks transformation) link: https://storageadlsdemooin.blob.core.windows.net/herovired-processed/sales_data_transformed/part-00000-tid-3492786193996661090-d6fd3986-9077-4a60-8815-1b5c28ce21f1-19-1.c000.snappy.parquet
 
 #### SQL table: SalesData
 
