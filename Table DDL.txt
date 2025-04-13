@@ -1,0 +1,8 @@
+CREATE TABLE SalesData (
+ Date DATE,
+ Product NVARCHAR(50),
+ Region NVARCHAR(20),
+ UnitsSold INT,
+ UnitPrice DECIMAL(10,2),
+ TotalSale DECIMAL(10,2)
+);
